@@ -1,11 +1,13 @@
 const jwtConfig = {
   access: {
     type: 'accessToken',
-    expiresIn: `${1000 * 60 * 5}`, // 5 минут
+    expiresIn: '5m',
+    cookieMaxAge: 1000 * 60 * 5,
   },
   refresh: {
     type: 'refreshToken',
-    expiresIn: `${1000 * 60 * 60 * 12}`, // 12 часов
+    expiresIn: '12h',
+    cookieMaxAge: 1000 * 60 * 60 * 12,
   },
 };
 module.exports = jwtConfig;
