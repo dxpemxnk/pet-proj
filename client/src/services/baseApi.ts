@@ -3,7 +3,7 @@ import { setCredentials, logOut } from '../store/authSlice';
 import { RootState } from '../store/store';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:4000/api',
+  baseUrl: '/api', 
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.accessToken;
     if (token) {
