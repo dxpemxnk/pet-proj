@@ -7,8 +7,8 @@ function verifyRefreshToken(req, res, next) {
     next();
   } catch (error) {
     console.log(error);
-    console.log('Invalid refresh token');
-    res.clearCookie('refreshToken').sendStatus(401);
+    console.log("Invalid refresh token");
+    res.clearCookie("refreshToken").sendStatus(401);
   }
 }
 module.exports = verifyRefreshToken;

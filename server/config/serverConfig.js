@@ -8,8 +8,8 @@ const serverConfig = (app) => {
     cors({
       origin: ["http://localhost:5173"],
       optionsSuccessStatus: 200,
-      credentials: true
-    })
+      credentials: true,
+    }),
   );
   app.use(express.json());
   app.use(morgan("combined"));

@@ -8,7 +8,7 @@ module.exports = {
         { name: "Роман", createdAt: new Date(), updatedAt: new Date() },
         { name: "Детектив", createdAt: new Date(), updatedAt: new Date() },
       ],
-      {}
+      {},
     );
   },
 

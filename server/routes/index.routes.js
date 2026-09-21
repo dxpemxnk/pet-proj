@@ -10,4 +10,3 @@ router.use("/api/categories", categoryRouter);
 router.use("/api/users", userRouter);
 
 module.exports = router;
-

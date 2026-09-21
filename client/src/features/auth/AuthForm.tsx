@@ -3,10 +3,17 @@
  * Получает оформление и onSubmit от родителя; Formik управляет полями и проверкой.
  * Сейчас страницы используют components/AuthForm.tsx, поэтому эта версия к ним не подключена.
  */
-import React from 'react';
-import { useFormik } from 'formik';
-import { TextField, Button, Box, Typography, Paper, Container } from '@mui/material';
-import { authSchema } from './authValidation';
+import React from "react";
+import { useFormik } from "formik";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Paper,
+  Container,
+} from "@mui/material";
+import { authSchema } from "./authValidation";
 
 interface AuthFormProps {
   title: string;
@@ -15,17 +22,29 @@ interface AuthFormProps {
   error?: string;
 }
 
-const AuthForm: React.FC<AuthFormProps> = ({ title, onSubmit, buttonText, error }) => {
+const AuthForm: React.FC<AuthFormProps> = ({
+  title,
+  onSubmit,
+  buttonText,
+  error,
+}) => {
   const formik = useFormik({
-    initialValues: { email: '', password: '' },
+    initialValues: { email: "", password: "" },
     validationSchema: authSchema,
     onSubmit: (values) => onSubmit(values),
   });
 
   return (
     <Container maxWidth="xs">
-      <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Paper elevation={3} sx={{ padding: 4, width: '100%' }}>
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Paper elevation={3} sx={{ padding: 4, width: "100%" }}>
           <Typography component="h1" variant="h5" align="center" gutterBottom>
             {title}
           </Typography>

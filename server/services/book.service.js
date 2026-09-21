@@ -5,9 +5,9 @@ class BookService {
   static async getAllBooks() {
     try {
       const books = await Book.findAll({
-       order: [["id", "ASC"]]
+        order: [["id", "ASC"]],
       });
-      
+
       return books;
     } catch (error) {
       throw new Error(error.message);
@@ -33,7 +33,9 @@ class BookService {
   }
   static async deleteBook(id, authUserId) {
     try {
-      const countDeletedBooks = await Book.destroy({ where: { id, user_id: authUserId } });  
+      const countDeletedBooks = await Book.destroy({
+        where: { id, user_id: authUserId },
+      });
       return countDeletedBooks;
     } catch (error) {
       throw new Error(error.message);

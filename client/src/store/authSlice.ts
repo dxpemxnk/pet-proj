@@ -3,8 +3,8 @@
  * Действие setCredentials сохраняет сессию, logOut очищает её.
  * Сам модуль не выполняет запросы и не сохраняет сессию между перезагрузками страницы.
  */
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from '../types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { User } from "../types";
 
 interface AuthState {
   user: User | null;
@@ -17,12 +17,12 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     setCredentials: (
       state,
-      action: PayloadAction<{ user: User; accessToken: string }>
+      action: PayloadAction<{ user: User; accessToken: string }>,
     ) => {
       state.user = action.payload.user;
       state.accessToken = action.payload.accessToken;

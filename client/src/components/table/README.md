@@ -16,10 +16,14 @@ last. Processing is local and does not mutate the supplied data.
   rows={users}
   getRowKey={(user) => user.id}
   columns={[
-    { id: 'email', label: 'Email', render: (user) => user.email,
-      sortValue: (user) => user.email },
+    {
+      id: "email",
+      label: "Email",
+      render: (user) => user.email,
+      sortValue: (user) => user.email,
+    },
   ]}
-  search={{ label: 'Поиск по email', getText: (user) => user.email }}
+  search={{ label: "Поиск по email", getText: (user) => user.email }}
 />
 ```
 

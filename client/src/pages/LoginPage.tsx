@@ -3,30 +3,37 @@
  * Отправляет email и пароль в API; при успехе сохраняет пользователя и токен в Redux
  * и открывает каталог, а при ошибке возвращает её сообщение в форму.
  */
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../services/authApi';
-import AuthForm from '../components/AuthForm';
-import { useAppDispatch } from '../store/hooks';
-import { setCredentials } from '../store/authSlice';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../services/authApi";
+import AuthForm from "../components/AuthForm";
+import { useAppDispatch } from "../store/hooks";
+import { setCredentials } from "../store/authSlice";
 
 const LoginPage = () => {
   const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (values: any) => {
     try {
       const result = await login(values).unwrap();
       dispatch(setCredentials(result));
-      navigate('/');
+      navigate("/");
     } catch (err: any) {
-      setError(err.data?.message || 'Ошибка входа');
+      setError(err.data?.message || "Ошибка входа");
     }
   };
 
-  return <AuthForm title="Вход" buttonText="Войти" onSubmit={handleLogin} error={error} />;
+  return (
+    <AuthForm
+      title="Вход"
+      buttonText="Войти"
+      onSubmit={handleLogin}
+      error={error}
+    />
+  );
 };
 
 export default LoginPage;

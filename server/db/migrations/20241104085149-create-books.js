@@ -28,7 +28,7 @@ module.exports = {
           model: "Categories",
           key: "id",
         },
-        onDelete: 'CASCADE',
+        onDelete: "CASCADE",
       },
       user_id: {
         allowNull: false,
@@ -37,7 +37,7 @@ module.exports = {
           model: "Users",
           key: "id",
         },
-        onDelete: 'CASCADE',
+        onDelete: "CASCADE",
       },
       createdAt: {
         allowNull: false,

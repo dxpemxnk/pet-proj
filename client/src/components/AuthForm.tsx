@@ -4,14 +4,23 @@
  * Formik хранит значения и состояние полей, Yup проверяет email и пароль.
  * Форма передаёт данные родителю; запросы к API выполняются на страницах.
  */
-import React from 'react';
-import { useFormik } from 'formik';
-import { TextField, Button, Box, Typography, Paper, Container } from '@mui/material';
-import * as Yup from 'yup';
+import React from "react";
+import { useFormik } from "formik";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Paper,
+  Container,
+} from "@mui/material";
+import * as Yup from "yup";
 
 const authSchema = Yup.object().shape({
-  email: Yup.string().email('Некорректный email').required('Обязательное поле'),
-  password: Yup.string().min(3, 'Минимум 3 символа').required('Обязательное поле'),
+  email: Yup.string().email("Некорректный email").required("Обязательное поле"),
+  password: Yup.string()
+    .min(3, "Минимум 3 символа")
+    .required("Обязательное поле"),
 });
 
 interface AuthFormProps {
@@ -21,17 +30,29 @@ interface AuthFormProps {
   error?: string;
 }
 
-const AuthForm: React.FC<AuthFormProps> = ({ title, onSubmit, buttonText, error }) => {
+const AuthForm: React.FC<AuthFormProps> = ({
+  title,
+  onSubmit,
+  buttonText,
+  error,
+}) => {
   const formik = useFormik({
-    initialValues: { email: '', password: '' },
+    initialValues: { email: "", password: "" },
     validationSchema: authSchema,
     onSubmit: (values) => onSubmit(values),
   });
 
   return (
     <Container maxWidth="xs">
-      <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Paper elevation={3} sx={{ padding: 4, width: '100%' }}>
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Paper elevation={3} sx={{ padding: 4, width: "100%" }}>
           <Typography component="h1" variant="h5" align="center" gutterBottom>
             {title}
           </Typography>
