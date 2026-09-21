@@ -1,4 +1,9 @@
-﻿import { baseApi } from './baseApi';
+/**
+ * Запросы каталога на основе общего baseApi: чтение книг и категорий, создание, изменение и удаление.
+ * Экспортируемые хуки дают компонентам данные, состояние запроса и функции отправки изменений.
+ * Тег Books связывает изменения с кешем: активный запрос списка повторяется после его сброса.
+ */
+import { baseApi } from './baseApi';
 import { Book, Category } from '../types';
 export type BookInput = Pick<Book, 'title' | 'author' | 'pages' | 'category_id'>;
 export const booksApi = baseApi.injectEndpoints({

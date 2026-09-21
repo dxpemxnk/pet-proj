@@ -1,4 +1,10 @@
-﻿import { Alert, Box, Button, CircularProgress, Paper, Table, TableBody, TableCell,
+/**
+ * Универсальная таблица для строк типа T: получает данные, колонки и ключ строки через параметры.
+ * Объединяет TableSearch, TableFilters и TableSort; состояние и обработку данных делегирует useTableData.
+ * Отображает готовые строки, счётчик, загрузку, ошибки и пустой результат.
+ * Не знает о книгах и API: внешний компонент передаёт данные и содержимое ячеек через render.
+ */
+import { Alert, Box, Button, CircularProgress, Paper, Table, TableBody, TableCell,
   TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { TableSearch } from './TableSearch';
 import { TableFilters } from './TableFilters';

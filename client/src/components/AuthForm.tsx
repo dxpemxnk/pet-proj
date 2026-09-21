@@ -1,3 +1,9 @@
+/**
+ * Общая форма, которую сейчас используют страницы входа и регистрации.
+ * Получает заголовок, текст кнопки, сообщение об ошибке и обработчик onSubmit.
+ * Formik хранит значения и состояние полей, Yup проверяет email и пароль.
+ * Форма передаёт данные родителю; запросы к API выполняются на страницах.
+ */
 import React from 'react';
 import { useFormik } from 'formik';
 import { TextField, Button, Box, Typography, Paper, Container } from '@mui/material';

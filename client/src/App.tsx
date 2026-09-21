@@ -1,3 +1,8 @@
+/**
+ * Корневой компонент приложения: отображает шапку и выбирает страницу по URL.
+ * Показывает навигацию в зависимости от пользователя в Redux и обрабатывает выход.
+ * Сами формы и каталог находятся в компонентах страниц.
+ */
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Container, Box } from '@mui/material';

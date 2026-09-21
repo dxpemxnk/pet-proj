@@ -1,3 +1,8 @@
+/**
+ * Хранит текущего пользователя и access-токен в памяти Redux.
+ * Действие setCredentials сохраняет сессию, logOut очищает её.
+ * Сам модуль не выполняет запросы и не сохраняет сессию между перезагрузками страницы.
+ */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../types';
 

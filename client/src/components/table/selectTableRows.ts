@@ -1,6 +1,14 @@
-﻿import type { SortState, TableConfig } from './types';
+import type { SortState, TableConfig } from './types';
 
 const collator = new Intl.Collator('ru', { sensitivity: 'base', numeric: true });
+/**
+ * Подготавливает данные для таблицы: применяет поиск без учёта регистра,
+ * оставляет строки, подходящие под все выбранные фильтры, и сортирует их.
+ * Правила поиска, фильтрации и получения значений для сортировки задаются
+ * в конфигурации, поэтому функция подходит для строк любого типа T.
+ * Возвращает новый массив, не изменяя исходный; пустые значения при
+ * сортировке всегда располагаются в конце независимо от направления.
+ */
 export function selectTableRows<T>(
   { rows, columns, search, filters = [] }: TableConfig<T>,
   query: string,
@@ -17,7 +25,7 @@ export function selectTableRows<T>(
     result.sort((left, right) => {
       const a = accessor(left);
       const b = accessor(right);
-      // Missing values remain at the end in either direction.
+      // Пустые значения остаются в конце при любом направлении сортировки.
       if (a == null) return b == null ? 0 : 1;
       if (b == null) return -1;
       const comparison = typeof a === 'number' && typeof b === 'number' ? a - b : collator.compare(String(a), String(b));

@@ -1,3 +1,8 @@
+/**
+ * Альтернативная версия формы авторизации с вынесенной схемой authValidation.
+ * Получает оформление и onSubmit от родителя; Formik управляет полями и проверкой.
+ * Сейчас страницы используют components/AuthForm.tsx, поэтому эта версия к ним не подключена.
+ */
 import React from 'react';
 import { useFormik } from 'formik';
 import { TextField, Button, Box, Typography, Paper, Container } from '@mui/material';

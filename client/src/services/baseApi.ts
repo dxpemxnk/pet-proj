@@ -1,3 +1,8 @@
+/**
+ * Общая настройка RTK Query: отправляет запросы на /api и добавляет access-токен из Redux.
+ * При ответе 403 пытается обновить сессию, сохраняет новые данные и повторяет исходный запрос.
+ * Если обновление не удалось, очищает сессию. Здесь же объявлены общие теги кеша API.
+ */
 import { createApi, fetchBaseQuery, BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { setCredentials, logOut } from '../store/authSlice';
 import { RootState } from '../store/store';

@@ -1,4 +1,10 @@
-﻿import React, { useState } from 'react';
+/**
+ * Страница каталога: получает книги и категории через API, задаёт колонки, поиск и фильтры.
+ * Передаёт данные универсальной DataTable и управляет формами создания, редактирования и удаления.
+ * Показывает ошибки и уведомления; кнопки изменения доступны владельцу книги.
+ * Проверка прав на сервере остаётся обязательной: скрытие кнопок само по себе данные не защищает.
+ */
+import React, { useState } from 'react';
 import { Alert, Box, Button, Dialog, DialogActions, DialogContent,
   DialogContentText, DialogTitle, MenuItem, Snackbar, TextField, Typography } from '@mui/material';
 import { useCreateBookMutation, useDeleteBookMutation, useGetBooksQuery,

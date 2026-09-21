@@ -1,3 +1,8 @@
+/**
+ * Страница регистрации: использует общую AuthForm для ввода email и пароля.
+ * Создаёт аккаунт через API, сохраняет полученную сессию в Redux и открывает каталог.
+ * Ошибки регистрации передаёт в форму для отображения.
+ */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRegistrationMutation } from '../services/authApi';

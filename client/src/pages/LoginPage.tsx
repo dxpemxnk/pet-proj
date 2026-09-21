@@ -1,3 +1,8 @@
+/**
+ * Страница входа: передаёт оформление и обработчик отправки в общую AuthForm.
+ * Отправляет email и пароль в API; при успехе сохраняет пользователя и токен в Redux
+ * и открывает каталог, а при ошибке возвращает её сообщение в форму.
+ */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../services/authApi';

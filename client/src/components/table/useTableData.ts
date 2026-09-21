@@ -1,4 +1,10 @@
-﻿import { useMemo, useState } from 'react';
+/**
+ * Хук управления таблицей: хранит поисковый запрос, значения фильтров и выбранную сортировку.
+ * Через selectTableRows вычисляет видимые строки при изменении данных или настроек.
+ * Возвращает результат и обработчики для компонентов управления, включая общий сброс.
+ * Сортировка переключается по циклу: возрастание, убывание, исходный порядок.
+ */
+import { useMemo, useState } from 'react';
 import { selectTableRows } from './selectTableRows';
 import type { SortState, TableConfig } from './types';
 

@@ -1,3 +1,8 @@
+/**
+ * Точка входа клиента: монтирует App в HTML-элемент root.
+ * Provider делает Redux доступным компонентам, CssBaseline задаёт базовые стили Material UI.
+ * StrictMode включает дополнительные проверки React при разработке.
+ */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';

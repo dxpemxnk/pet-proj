@@ -1,3 +1,8 @@
+/**
+ * Создаёт общее хранилище Redux: состояние авторизации и кеш запросов RTK Query.
+ * Подключает middleware API для обработки запросов и обновления кеша.
+ * Экспортирует типы состояния и dispatch, используемые типизированными хуками.
+ */
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
 import { baseApi } from '../services/baseApi';

@@ -1,4 +1,10 @@
-﻿import type { Key, ReactNode } from 'react';
+/**
+ * Контракты универсальной таблицы. Тип T описывает одну строку произвольной структуры.
+ * TableColumn задаёт отображение ячейки render и необязательное значение сортировки sortValue.
+ * TableFilter задаёт варианты выбора и правило matches; TableConfig объединяет данные и настройки.
+ * DataTableProps добавляет ключ строки, подпись таблицы и параметры загрузки и ошибок.
+ */
+import type { Key, ReactNode } from 'react';
 
 export type SortValue = string | number | null | undefined;
 export interface TableColumn<T> {
