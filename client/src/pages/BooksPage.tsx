@@ -1,11 +1,12 @@
 ﻿import React, { useState } from 'react';
-import { Alert, Box, Button, CircularProgress, Dialog, DialogActions, DialogContent,
-  DialogContentText, DialogTitle, MenuItem, Paper, Snackbar, Table, TableBody,
-  TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, Dialog, DialogActions, DialogContent,
+  DialogContentText, DialogTitle, MenuItem, Snackbar, TextField, Typography } from '@mui/material';
 import { useCreateBookMutation, useDeleteBookMutation, useGetBooksQuery,
   useGetCategoriesQuery, useUpdateBookMutation } from '../services/booksApi';
 import { useAppSelector } from '../store/hooks';
 import { Book } from '../types';
+import { DataTable } from '../components/table/DataTable';
+import type { TableColumn, TableFilter } from '../components/table/types';
 
 const emptyForm = { title: '', author: '', pages: '', category_id: '' };
 function errorMessage(error: unknown) {
@@ -66,6 +67,23 @@ export default function BooksPage() {
     } catch (failure) { setDeleteError(errorMessage(failure)); }
   }
 
+  const columns: TableColumn<Book>[] = [
+    { id: 'title', label: 'Название', render: (book) => book.title, sortValue: (book) => book.title },
+    { id: 'author', label: 'Автор', render: (book) => book.author, sortValue: (book) => book.author },
+    { id: 'pages', label: 'Страниц', render: (book) => book.pages, sortValue: (book) => book.pages, align: 'right' },
+    { id: 'category', label: 'Категория', render: (book) => categories.data?.categories.find((category) => category.id === book.category_id)?.name ?? book.Category?.name ?? ('Категория №' + book.category_id) },
+    { id: 'actions', label: 'Действия', render: (book) => user?.id === book.user_id ? <Box sx={{ display: 'flex', gap: 1 }}>
+      <Button size="small" aria-label={'Редактировать ' + book.title} onClick={() => openEditor(book)}>Редактировать</Button>
+      <Button size="small" color="error" aria-label={'Удалить ' + book.title} onClick={() => { setDeleteTarget(book); setDeleteError(''); }}>Удалить</Button>
+    </Box> : '—' },
+  ];
+  const filters: TableFilter<Book>[] = [{
+    id: 'category', label: 'Категория',
+    options: categories.data?.categories.map((category) => ({ value: String(category.id), label: category.name })) ?? [],
+    matches: (book, value) => String(book.category_id) === value,
+    disabled: categories.isLoading || !!categories.error,
+  }];
+
   return (
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, flexWrap: 'wrap', mb: 3 }}>
@@ -73,29 +91,18 @@ export default function BooksPage() {
         {user && <Button variant="contained" onClick={() => openEditor()}>Добавить книгу</Button>}
       </Box>
       {!user && <Alert severity="info" sx={{ mb: 2 }}>Войдите, чтобы добавлять книги и управлять своими записями.</Alert>}
-      {isLoading ? <Box role="status" sx={{ p: 4, textAlign: 'center' }}><CircularProgress aria-label="Загрузка книг" /></Box> : error ? (
-        <Alert severity="error" action={<Button color="inherit" onClick={() => refetch()}>Повторить</Button>}>Не удалось загрузить книги.</Alert>
-      ) : (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="Каталог книг">
-            <TableHead><TableRow>
-              <TableCell>Название</TableCell><TableCell>Автор</TableCell><TableCell>Страниц</TableCell><TableCell>Категория</TableCell><TableCell>Действия</TableCell>
-            </TableRow></TableHead>
-            <TableBody>
-              {data?.books.map((book) => <TableRow key={book.id} hover>
-                <TableCell component="th" scope="row">{book.title}</TableCell>
-                <TableCell>{book.author}</TableCell><TableCell>{book.pages}</TableCell>
-                <TableCell>{categories.data?.categories.find((category) => category.id === book.category_id)?.name ?? book.Category?.name ?? `Категория №${book.category_id}`}</TableCell>
-                <TableCell>{user?.id === book.user_id ? <Box sx={{ display: 'flex', gap: 1 }}>
-                  <Button size="small" aria-label={`Редактировать ${book.title}`} onClick={() => openEditor(book)}>Редактировать</Button>
-                  <Button size="small" color="error" aria-label={`Удалить ${book.title}`} onClick={() => { setDeleteTarget(book); setDeleteError(''); }}>Удалить</Button>
-                </Box> : '—'}</TableCell>
-              </TableRow>)}
-              {!data?.books.length && <TableRow><TableCell colSpan={5} align="center" sx={{ py: 5 }}>Книг пока нет. Добавьте первую книгу.</TableCell></TableRow>}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+      <DataTable
+        rows={data?.books ?? []}
+        columns={columns}
+        getRowKey={(book) => book.id}
+        label="Каталог книг"
+        search={{ label: 'Поиск по названию или автору', getText: (book) => book.title + ' ' + book.author }}
+        filters={filters}
+        loading={isLoading}
+        error={error ? 'Не удалось загрузить книги.' : undefined}
+        onRetry={() => refetch()}
+        emptyMessage="Книг пока нет. Добавьте первую книгу."
+      />
       <Dialog open={editorOpen} onClose={() => { if (!saving) setEditorOpen(false); }} fullWidth maxWidth="sm" aria-labelledby="book-editor-title">
         <form onSubmit={save}>
           <DialogTitle id="book-editor-title">{editing ? 'Редактировать книгу' : 'Добавить книгу'}</DialogTitle>
@@ -132,3 +139,4 @@ export default function BooksPage() {
     </Box>
   );
 }
+
