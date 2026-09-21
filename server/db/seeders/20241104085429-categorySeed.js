@@ -6,7 +6,6 @@ module.exports = {
       [
         { name: "Фантастика", createdAt: new Date(), updatedAt: new Date() },
         { name: "Роман", createdAt: new Date(), updatedAt: new Date() },
-        { name: "Полина", createdAt: new Date(), updatedAt: new Date() },
         { name: "Детектив", createdAt: new Date(), updatedAt: new Date() },
       ],
       {}
