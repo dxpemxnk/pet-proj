@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const BookService = require('../../services/book.service');
 const verifyAccessToken = require('../../middleware/varifyAccessToken');
+const validateBook = require('../../middleware/validateBook');
 
 // Получить все книги
 router.get('/', async (req, res) => {
@@ -13,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 // Создать книгу (только для авторизованных)
-router.post('/', verifyAccessToken, async (req, res) => {
+router.post('/', verifyAccessToken, validateBook, async (req, res) => {
   try {
     const { title, author, pages, category_id } = req.body;
     const newBook = await BookService.createBook({
@@ -54,7 +55,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Обновить книгу (только свою)
-router.put('/:id', verifyAccessToken, async (req, res) => {
+router.put('/:id', verifyAccessToken, validateBook, async (req, res) => {
   try {
     const { id } = req.params;
     const { title, author, pages, category_id } = req.body;
